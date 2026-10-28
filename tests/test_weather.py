@@ -40,6 +40,10 @@ def test_parse_time_format():
     ],
 )
 
+def test_parse_time_invalid_inputs(invalid_input):
+    with pytest.raises(ValueError):
+        parse_time(invalid_input)
+
 
 #2
 def test_parse_measurement_regular_line():
@@ -59,6 +63,10 @@ def test_parse_measurement_leerzeichen():
         "Köln;14:21;heiß",  # Temp kein Float
     ],
 )
+
+def test_parse_measurement_invalid_inputs(invalid_line):
+    with pytest.raises(ValueError):
+        parse_measurement(invalid_line)
 
 
 #3
