@@ -97,6 +97,24 @@ def test_filter_by_temperature_grenzen_lower_gleich_upper():
         ("Köln", 600, 10.0)
     ]
 
+def test_filter_by_temperature_lower_größerals_upper():
+    measurements = [("Köln", 600, 10.0)]
+    with pytest.raises(ValueError):
+        filter_by_temperature(measurements, 20.0, 10.0)
+
+def test_filter_by_temperature_duplikate_bleiben():
+    m = ("Köln", 600, 10.0)
+    measurements = [m, m]
+    assert filter_by_temperature(measurements, 5.0, 15.0) == [m, m]
+
+def test_filter_by_temperature_originalliste_bleibt_und_neue_liste():
+    measurements = [("Köln", 600, 10.0)]
+    original_copy = list(measurements)
+
+    result = filter_by_temperature(measurements, 5.0, 15.0)
+
+    assert measurements == original_copy
+
 
 #4
 def test_average_temperature_regular_values():
